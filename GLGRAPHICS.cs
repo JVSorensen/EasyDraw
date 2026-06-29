@@ -47,7 +47,18 @@ namespace EasyDraw
         {
             core.SwapBuffers();
         }
+        public void SetSize(int w, int h)
+        {
+            OPENGLCORE.glViewport(0, 0, w, h);
 
+            OPENGLCORE.glMatrixMode(OPENGLCORE.GL_PROJECTION);
+            OPENGLCORE.glLoadIdentity();
+
+            OPENGLCORE.glOrtho(0, w, h, 0, -1, 1);
+
+            OPENGLCORE.glMatrixMode(OPENGLCORE.GL_MODELVIEW);
+            OPENGLCORE.glLoadIdentity();
+        }
         public void Clear(Color color)
         {
             OPENGLCORE.glClearColor(color.R / 255.0f, color.G / 255.0f, color.B / 255.0f, color.A / 255.0f);
