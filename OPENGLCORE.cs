@@ -197,6 +197,7 @@ namespace EasyDraw
 
         public const uint GL_QUADS = 0x0007;
 
+        public const uint GL_NEAREST = 0x2600;
         public const int GL_LINEAR = 0x2601;
 
         public const uint GL_SRC_ALPHA = 0x0302;

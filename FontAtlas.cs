@@ -36,11 +36,15 @@ namespace EasyDraw
 
             OPENGLCORE.glTexParameteri(OPENGLCORE.GL_TEXTURE_2D,
                 OPENGLCORE.GL_TEXTURE_MIN_FILTER,
-                OPENGLCORE.GL_LINEAR);
+                //(int)OPENGLCORE.GL_NEAREST
+                OPENGLCORE.GL_LINEAR
+                 );
 
             OPENGLCORE.glTexParameteri(OPENGLCORE.GL_TEXTURE_2D,
                 OPENGLCORE.GL_TEXTURE_MAG_FILTER,
-                OPENGLCORE.GL_LINEAR);
+                //(int)OPENGLCORE.GL_NEAREST
+                OPENGLCORE.GL_LINEAR
+                 );
 
             bmp.UnlockBits(data);
 
@@ -61,9 +65,12 @@ namespace EasyDraw
         public int atlasHeight = 512;
         public Bitmap bmp;
 
-        public void Build(string fontName, float fontSize)
+        public float fontHeight;
+
+        public void Build(string fontName, float _fontSize)
         {
-            Font font = new Font(fontName, fontSize, GraphicsUnit.Pixel);
+            fontHeight = _fontSize;
+            Font font = new Font(fontName, _fontSize, GraphicsUnit.Pixel);
 
             bmp = new Bitmap(atlasHeight, atlasHeight, PixelFormat.Format32bppArgb);
             Graphics g = Graphics.FromImage(bmp);
