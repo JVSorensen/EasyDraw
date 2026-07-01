@@ -64,19 +64,19 @@ namespace EasyDraw
             OPENGLCORE.glClearColor(color.R / 255.0f, color.G / 255.0f, color.B / 255.0f, color.A / 255.0f);
             OPENGLCORE.glClear(OPENGLCORE.GL_COLOR_BUFFER_BIT);
         }
-        public void DrawPoint(Pen p, float x, float y, float r)
+        public void DrawPoint(Color color, float x, float y, float r)
         {
             OPENGLCORE.glPointSize(r); // Size of each dot
             OPENGLCORE.glBegin(OPENGLCORE.GL_POINTS);
-            OPENGLCORE.glColor3f(p.Color.R / 255.0f, p.Color.G / 255.0f, p.Color.B / 255.0f);
+            OPENGLCORE.glColor3f(color.R / 255.0f, color.G / 255.0f, color.B / 255.0f);
             OPENGLCORE.glVertex2f(x, y);
             OPENGLCORE.glEnd();
         }
-        public void DrawPoints(Pen p, float[] path, float r)
+        public void DrawPoints(Color color, float[] path, float r)
         {
             OPENGLCORE.glPointSize(r); // Size of each dot
             OPENGLCORE.glBegin(OPENGLCORE.GL_POINTS);
-            OPENGLCORE.glColor3f(p.Color.R / 255.0f, p.Color.G / 255.0f, p.Color.B / 255.0f);
+            OPENGLCORE.glColor3f(color.R / 255.0f, color.G / 255.0f, color.B / 255.0f);
             for (int i = 0; i < path.Length; i += 2)
             {
                 OPENGLCORE.glVertex2f(path[i], path[i + 1]);
@@ -84,28 +84,28 @@ namespace EasyDraw
             OPENGLCORE.glEnd();
         }
 
-        public void DrawLine(Pen p, Point point1, Point point2)
+        public void DrawLine(Color color, Point point1, Point point2)
         {
             OPENGLCORE.glBegin(OPENGLCORE.GL_LINES);
-            OPENGLCORE.glColor3f(p.Color.R / 255.0f, p.Color.G / 255.0f, p.Color.B / 255.0f);
+            OPENGLCORE.glColor3f(color.R / 255.0f, color.G / 255.0f, color.B / 255.0f);
             OPENGLCORE.glVertex2f(point1.X, point1.Y);
             OPENGLCORE.glVertex2f(point2.X, point2.Y);
             OPENGLCORE.glEnd();
         }
-        public void DrawLines(Pen p, Point[] path)
+        public void DrawLines(Color color, Point[] path)
         {
             OPENGLCORE.glBegin(OPENGLCORE.GL_LINE_STRIP);
-            OPENGLCORE.glColor3f(p.Color.R / 255.0f, p.Color.G / 255.0f, p.Color.B / 255.0f);
+            OPENGLCORE.glColor3f(color.R / 255.0f, color.G / 255.0f, color.B / 255.0f);
             foreach (Point point in path)
             {
                 OPENGLCORE.glVertex2f(point.X, point.Y);
             }
             OPENGLCORE.glEnd();
         }
-        public void DrawPolygon(Pen p, Point[] path)
+        public void DrawPolygon(Color color, Point[] path)
         {
             OPENGLCORE.glBegin(OPENGLCORE.GL_LINE_LOOP);
-            OPENGLCORE.glColor3f(p.Color.R / 255.0f, p.Color.G / 255.0f, p.Color.B / 255.0f);
+            OPENGLCORE.glColor3f(color.R / 255.0f, color.G / 255.0f, color.B / 255.0f);
             foreach (Point point in path)
             {
                 OPENGLCORE.glVertex2f(point.X, point.Y);
@@ -113,14 +113,14 @@ namespace EasyDraw
             OPENGLCORE.glEnd();
         }
 
-        public void DrawEllipse(Pen p, Rectangle rect)
+        public void DrawEllipse(Color color, Rectangle rect)
         {
             OPENGLCORE.glPushMatrix();
             OPENGLCORE.glTranslatef(rect.Location.X, rect.Location.Y, 0);
             OPENGLCORE.glScalef(rect.Size.Width * 0.5f, rect.Size.Height * 0.5f, 1);
             OPENGLCORE.glTranslatef(1, 1, 0);
             OPENGLCORE.glBegin(OPENGLCORE.GL_LINE_LOOP);
-            OPENGLCORE.glColor3f(p.Color.R / 255.0f, p.Color.G / 255.0f, p.Color.B / 255.0f);
+            OPENGLCORE.glColor3f(color.R / 255.0f, color.G / 255.0f, color.B / 255.0f);
             foreach (PointF pt in unitCircle)
             {
                 OPENGLCORE.glVertex2f(pt.X, pt.Y);
@@ -128,14 +128,14 @@ namespace EasyDraw
             OPENGLCORE.glEnd();
             OPENGLCORE.glPopMatrix();
         }
-        public void DrawArc(Pen p, Rectangle rect, float startAngle, float sweepAngle)
+        public void DrawArc(Color color, Rectangle rect, float startAngle, float sweepAngle)
         {
             OPENGLCORE.glPushMatrix();
             OPENGLCORE.glTranslatef(rect.Location.X, rect.Location.Y, 0);
             OPENGLCORE.glScalef(rect.Size.Width * 0.5f, rect.Size.Height * 0.5f, 1);
             OPENGLCORE.glTranslatef(1, 1, 0);
             OPENGLCORE.glBegin(OPENGLCORE.GL_LINE_STRIP);
-            OPENGLCORE.glColor3f(p.Color.R / 255.0f, p.Color.G / 255.0f, p.Color.B / 255.0f);
+            OPENGLCORE.glColor3f(color.R / 255.0f, color.G / 255.0f, color.B / 255.0f);
             int i0 = (int)(unitCircle.Length * startAngle / 360.0);
             int i1 = (int)(unitCircle.Length * (startAngle + sweepAngle) / 360.0);
             for (int i = i0; i <= i1; i++)
@@ -151,34 +151,30 @@ namespace EasyDraw
         }
 
 
-        public void DrawRectangle(Pen p, Rectangle rect)
+        public void DrawRectangle(Color color, Rectangle rect)
         {
             OPENGLCORE.glBegin(OPENGLCORE.GL_LINE_LOOP);
-            OPENGLCORE.glColor3f(p.Color.R / 255.0f, p.Color.G / 255.0f, p.Color.B / 255.0f);
+            OPENGLCORE.glColor3f(color.R / 255.0f, color.G / 255.0f, color.B / 255.0f);
             OPENGLCORE.glVertex2f(rect.Location.X, rect.Location.Y);
             OPENGLCORE.glVertex2f(rect.Location.X + rect.Size.Width, rect.Location.Y);
             OPENGLCORE.glVertex2f(rect.Location.X + rect.Size.Width, rect.Location.Y + rect.Size.Height);
             OPENGLCORE.glVertex2f(rect.Location.X, rect.Location.Y + rect.Size.Height);
             OPENGLCORE.glEnd();
         }
-        public void DrawRectangles(Pen p, Rectangle[] rects)
+        public void DrawRectangles(Color color, Rectangle[] rects)
         {
             foreach (Rectangle rect in rects)
             {
-                DrawRectangle(p, rect);
+                DrawRectangle(color, rect);
             }
         }
 
-        public void DrawBezier(Pen p, Point point1, Point point2, Point point3, Point point4)
+        public void DrawBezier(Color color, Point point1, Point point2, Point point3, Point point4)
         {
             OPENGLCORE.glBegin(OPENGLCORE.GL_LINE_STRIP);
 
             // Move color setup outside the loop
-            OPENGLCORE.glColor3f(
-                p.Color.R * (1f / 255f),
-                p.Color.G * (1f / 255f),
-                p.Color.B * (1f / 255f)
-            );
+            OPENGLCORE.glColor3f(color.R / 255.0f, color.G / 255.0f, color.B / 255.0f);
 
             float fbl = (float)bezierLen;
             float px1 = point1.X, py1 = point1.Y;
@@ -208,19 +204,19 @@ namespace EasyDraw
             OPENGLCORE.glEnd();
         }
 
-        public void DrawBeziers(Pen p, Point[] points)
+        public void DrawBeziers(Color color, Point[] points)
         {
             if (points.Length > 3)
             {
                 for (int i = 0; i < points.Length - 3; i += 3)
                 {
-                    DrawBezier(p, points[i], points[i + 1], points[i + 2], points[i + 3]);
+                    DrawBezier(color, points[i], points[i + 1], points[i + 2], points[i + 3]);
                 }
             }
         }
 
 
-        public void DrawClosedCurve(Pen p, Point[] path)
+        public void DrawClosedCurve(Color color, Point[] path)
         {
             int count = path.Length;
             if (count < 4)
@@ -230,7 +226,7 @@ namespace EasyDraw
             else
             {
                 OPENGLCORE.glBegin(OPENGLCORE.GL_LINE_STRIP);
-                OPENGLCORE.glColor3f(p.Color.R * (1f / 255f), p.Color.G * (1f / 255f), p.Color.B * (1f / 255f));
+                OPENGLCORE.glColor3f(color.R / 255.0f, color.G / 255.0f, color.B / 255.0f);
                 float cspF = (float)curveStepsPerSegment;
 
                 for (int i = 0; i < count; i++)
@@ -265,7 +261,7 @@ namespace EasyDraw
                 OPENGLCORE.glEnd();
             }
         }
-        public void DrawCurve(Pen p, Point[] path)
+        public void DrawCurve(Color color, Point[] path)
         {
             int count = path.Length;
             if (count < 4) return;
@@ -275,7 +271,7 @@ namespace EasyDraw
             int steps = curveStepsPerSegment;
 
             OPENGLCORE.glBegin(OPENGLCORE.GL_LINE_STRIP);
-            OPENGLCORE.glColor3f(p.Color.R * inv255, p.Color.G * inv255, p.Color.B * inv255);
+            OPENGLCORE.glColor3f(color.R / 255.0f, color.G / 255.0f, color.B / 255.0f);
 
             for (int i = 0; i < count - 1; i++)
             {
@@ -316,14 +312,14 @@ namespace EasyDraw
             OPENGLCORE.glEnd();
         }
 
-        public void FillEllipse(Brush b, Rectangle rect)
+        public void FillEllipse(Color color, Rectangle rect)
         {
             OPENGLCORE.glPushMatrix();
             OPENGLCORE.glTranslatef(rect.Location.X, rect.Location.Y, 0);
             OPENGLCORE.glScalef(rect.Size.Width * 0.5f, rect.Size.Height * 0.5f, 1);
             OPENGLCORE.glTranslatef(1, 1, 0);
             OPENGLCORE.glBegin(OPENGLCORE.GL_TRIANGLE_FAN);
-            OPENGLCORE.glColor3f(((SolidBrush)b).Color.R / 255.0f, ((SolidBrush)b).Color.G / 255.0f, ((SolidBrush)b).Color.B / 255.0f);
+            OPENGLCORE.glColor3f(color.R / 255.0f, color.G / 255.0f, color.B / 255.0f);
             OPENGLCORE.glVertex2f(0, 0);
             PointF ft = unitCircle[0];
             foreach (PointF pt in unitCircle)
@@ -335,14 +331,14 @@ namespace EasyDraw
             OPENGLCORE.glPopMatrix();
         }
 
-        public void FillPie(Brush b, Rectangle rect, float startAngle, float sweepAngle)
+        public void FillPie(Color color, Rectangle rect, float startAngle, float sweepAngle)
         {
             OPENGLCORE.glPushMatrix();
             OPENGLCORE.glTranslatef(rect.Location.X, rect.Location.Y, 0);
             OPENGLCORE.glScalef(rect.Size.Width * 0.5f, rect.Size.Height * 0.5f, 1);
             OPENGLCORE.glTranslatef(1, 1, 0);
             OPENGLCORE.glBegin(OPENGLCORE.GL_TRIANGLE_FAN);
-            OPENGLCORE.glColor3f(((SolidBrush)b).Color.R / 255.0f, ((SolidBrush)b).Color.G / 255.0f, ((SolidBrush)b).Color.B / 255.0f);
+            OPENGLCORE.glColor3f(color.R / 255.0f, color.G / 255.0f, color.B / 255.0f);
             int i0 = (int)(unitCircle.Length * startAngle / 360.0);
             int i1 = (int)(unitCircle.Length * (startAngle + sweepAngle) / 360.0);
 
@@ -358,7 +354,7 @@ namespace EasyDraw
             OPENGLCORE.glEnd();
             OPENGLCORE.glPopMatrix();
         }
-        public void FillPolygon(Brush b, Point[] points)
+        public void FillPolygon(Color color, Point[] points)
         {
             if (points == null || points.Length < 3)
                 return;
@@ -418,7 +414,7 @@ namespace EasyDraw
 
             OPENGLCORE.gluTessCallback(tess, OPENGLCORE.GLU_TESS_END, new OPENGLCORE.EndCallback(() => OPENGLCORE.glEnd()));
 
-            OPENGLCORE.glColor3f(((SolidBrush)b).Color.R / 255.0f, ((SolidBrush)b).Color.G / 255.0f, ((SolidBrush)b).Color.B / 255.0f);
+            OPENGLCORE.glColor3f(color.R / 255.0f, color.G / 255.0f, color.B / 255.0f);
 
             OPENGLCORE.gluTessProperty(tess, OPENGLCORE.GLU_TESS_WINDING_RULE, (double)OPENGLCORE.GLU_TESS_WINDING_NONZERO);
 
@@ -437,7 +433,7 @@ namespace EasyDraw
 
             OPENGLCORE.gluDeleteTess(tess);
         }
-        public void FillPolygon0(Brush b, Point[] loopedPoints)
+        public void FillPolygon0(Color color, Point[] loopedPoints)
         {
             if (loopedPoints == null || loopedPoints.Length < 3)
             {
@@ -457,7 +453,7 @@ namespace EasyDraw
                 cy /= count;
 
                 OPENGLCORE.glBegin(OPENGLCORE.GL_TRIANGLE_FAN);
-                OPENGLCORE.glColor3f(((SolidBrush)b).Color.R / 255.0f, ((SolidBrush)b).Color.G / 255.0f, ((SolidBrush)b).Color.B / 255.0f);
+                OPENGLCORE.glColor3f(color.R / 255.0f, color.G / 255.0f, color.B / 255.0f);
 
                 // Add center point
                 OPENGLCORE.glVertex2f(cx, cy);
@@ -475,10 +471,10 @@ namespace EasyDraw
             }
         }
 
-        public void FillRectangle(Brush b, Rectangle rect)
+        public void FillRectangle(Color color, Rectangle rect)
         {
             OPENGLCORE.glBegin(OPENGLCORE.GL_TRIANGLES);
-            OPENGLCORE.glColor3f(((SolidBrush)b).Color.R / 255.0f, ((SolidBrush)b).Color.G / 255.0f, ((SolidBrush)b).Color.B / 255.0f);
+            OPENGLCORE.glColor3f(color.R / 255.0f, color.G / 255.0f, color.B / 255.0f);
             OPENGLCORE.glVertex2f(rect.Location.X, rect.Location.Y);
             OPENGLCORE.glVertex2f(rect.Location.X + rect.Size.Width, rect.Location.Y);
             OPENGLCORE.glVertex2f(rect.Location.X + rect.Size.Width, rect.Location.Y + rect.Size.Height);
@@ -488,11 +484,11 @@ namespace EasyDraw
             OPENGLCORE.glVertex2f(rect.Location.X, rect.Location.Y);
             OPENGLCORE.glEnd();
         }
-        public void FillRectangles(Brush b, Rectangle[] rects)
+        public void FillRectangles(Color color, Rectangle[] rects)
         {
             foreach (Rectangle rect in rects)
             {
-                FillRectangle(b, rect);
+                FillRectangle(color, rect);
             }
         }
 
