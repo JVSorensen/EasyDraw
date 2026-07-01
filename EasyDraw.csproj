@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FontAtlas.cs" />
+    <Compile Include="GLFONT.cs" />
     <Compile Include="GLGRAPHICS.cs" />
     <Compile Include="OPENGLCORE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -514,7 +514,7 @@ namespace EasyDraw
         }
 
 
-        public void DrawText(FontAtlas atlas, GLColor Color, string text, float x, float y)
+        public void DrawText(GLFONT atlas, GLColor Color, string text, float x, float y)
         {
             OPENGLCORE.glEnable(OPENGLCORE.GL_TEXTURE_2D);
             OPENGLCORE.glEnable(OPENGLCORE.GL_BLEND);

@@ -10,8 +10,12 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
 
 namespace EasyDraw
 {
-    public class FontAtlas
+    public class GLFONT
     {
+        public GLFONT(string name, float h)
+        {
+            Build(name, h);
+        }
         int UploadToOpenGL(Bitmap bmp)
         {
             var data = bmp.LockBits(
